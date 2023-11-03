@@ -1,7 +1,12 @@
 package leetcode;
 
 
+import cn.hutool.core.lang.tree.TreeNode;
+import cn.hutool.core.math.MathUtil;
+import org.commonmark.node.Node;
+
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 public class Solution {
@@ -376,6 +381,34 @@ public class Solution {
         return true;
     }
 
+    /**
+     * 社团共有 num 为成员参与破冰游戏，编号为 0 ~ num-1。成员们按照编号顺序围绕圆桌而坐。社长抽取一个数字 target，从 0 号成员起开始计数，排在第 target 位的成员离开圆桌，且成员离开后从下一个成员开始计数。请返回游戏结束时最后一位成员的编号。
+     * @param num
+     * @param target
+     * @return
+     */
+    public static int iceBreakingGame(int num, int target) {
+        //目前理解了题意:是第target的人离开，然后继续循环，直到剩下最后一个人
+        // ArrayList<Integer> list = new ArrayList<>(num);
+        // for(int i = 0;i < num;i++){
+        //     list.add(i);
+        // }
+        // int idx = 0;
+        // while(num > 1){
+        //     idx = (idx + target - 1) % num;
+        //     list.remove(idx);
+        //     num--;
+        // }
+        // return list.get(0);
+
+        //f(n,m) = (f(n-1,m))+m % n  使用反推法得到  已知结果最后只有一个人，因此开始反推每次游戏结束时存货的人的编号，最后得此结论
+        int ans = 0;
+        for(int i = 2;i <= num;i++){
+            ans = (ans + target) % i;
+        }
+        return ans;
+    }
+
 
 
     public static void main(String[] args) {
@@ -398,15 +431,7 @@ public class Solution {
 //        }
 
 //        int i = majorityElement(nums);
+            iceBreakingGame(7,4);
 
-        int i,k = 0;
-        for (i = 0; i < 4; i++, i++){
-            System.out.println(i);
-            for (k = 0; k < 3; k++){
-                System.out.println(k);
-            }
-        }
-
-        System.out.println("i =" + i + ",k = " + k);
     }
 }

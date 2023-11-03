@@ -1,7 +1,6 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class MyTest15 {
     public static void main(String[] args) {
@@ -41,13 +40,22 @@ public class MyTest15 {
         String s = "A man, a plan, a canal: Panama";
         s = s.toLowerCase();
         char[] chars = s.toCharArray();
+        int res = 0;
+        int[] array = {1, 2, 3, 4, 5};
+        int[] ress = new int[2];
+        System.out.println(ress[1]);
+
 //        for(char cha:chars){
 //
 //            System.out.print(cha);
 //        }
 
 //        List<List<Integer>> list = new ArrayList<>();
-//        List<Integer> l = new ArrayList<>();
+        List<Integer> l = new ArrayList<>();
+        int i = 2;
+        for(i = 1;i++<4;);
+        i = i+5;
+        System.out.println("i => "+ i);
 //        l.add(-1);
 //        l.add(0);
 //        l.add(1);
@@ -59,10 +67,10 @@ public class MyTest15 {
 //        List<Integer> list1 = list.get(0);
 //        Object[] objects = list1.toArray();
 //        System.out.println(list);
-        System.out.println("   *   ");
-        System.out.println("  ***  ");
-        System.out.println(" ***** ");
-        System.out.println("*******");
+//        System.out.println("   *   ");
+//        System.out.println("  ***  ");
+//        System.out.println(" ***** ");
+//        System.out.println("*******");
 
 
     }
