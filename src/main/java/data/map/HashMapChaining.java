@@ -104,6 +104,8 @@ public class HashMapChaining {
         }
     }
 
+
+
     public static void main(String[] args) {
         HashMapChaining map = new HashMapChaining();
         map.put(2365,"mm");

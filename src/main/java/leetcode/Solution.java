@@ -381,6 +381,79 @@ public class Solution {
         return true;
     }
 
+
+        // 最高位的二进制位编号为 30
+        static final int HIGH_BIT = 30;
+
+        public int findMaximumXOR(int[] nums) {
+            int x = 0;
+            for (int k = HIGH_BIT; k >= 0; --k) {
+                Set<Integer> seen = new HashSet<Integer>();
+                // 将所有的 pre^k(a_j) 放入哈希表中
+                for (int num : nums) {
+                    // 如果只想保留从最高位开始到第 k 个二进制位为止的部分
+                    // 只需将其右移 k 位
+                    seen.add(num >> k);
+                }
+
+                // 目前 x 包含从最高位开始到第 k+1 个二进制位为止的部分
+                // 我们将 x 的第 k 个二进制位置为 1，即为 x = x*2+1
+                int xNext = x * 2 + 1;
+                boolean found = false;
+
+                // 枚举 i
+                for (int num : nums) {
+                    if (seen.contains(xNext ^ (num >> k))) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    x = xNext;
+                } else {
+                    // 如果没有找到满足等式的 a_i 和 a_j，那么 x 的第 k 个二进制位只能为 0
+                    // 即为 x = x*2
+                    x = xNext - 1;
+                }
+            }
+            return x;
+        }
+
+    /**
+     * 给你一个字符串数组 words ，找出并返回 length(words[i]) * length(words[j]) 的最大值，
+     * 并且这两个单词不含有公共字母。如果不存在这样的两个单词，返回 0 。
+     * 示例 1：
+     *
+     * 输入：words = ["abcw","baz","foo","bar","xtfn","abcdef"]
+     * 输出：16
+     * 解释：这两个单词为 "abcw", "xtfn"。
+     * @param words
+     * @return
+     */
+    public static int maxProduct(String[] words) {
+        int n = words.length, idx = 0;
+        int[] masks = new int[n];
+        for (String w : words) {
+            int t = 0;
+            for (int i = 0; i < w.length(); i++) {
+                int u = w.charAt(i) - 'a';
+                t |= (1 << u);
+            }
+            System.out.println(t);
+            masks[idx++] = t;
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if ((masks[i] & masks[j]) == 0) ans = Math.max(ans, words[i].length() * words[j].length());
+            }
+        }
+        return ans;
+    }
+
+
+
     /**
      * 社团共有 num 为成员参与破冰游戏，编号为 0 ~ num-1。成员们按照编号顺序围绕圆桌而坐。社长抽取一个数字 target，从 0 号成员起开始计数，排在第 target 位的成员离开圆桌，且成员离开后从下一个成员开始计数。请返回游戏结束时最后一位成员的编号。
      * @param num
@@ -413,6 +486,7 @@ public class Solution {
 
     public static void main(String[] args) {
        int[] nums = {3,2,3};
+       String[] words = {"abcw","baz","foo","bar","xtfn","abcdef"};
 //        int target = 7;
 //        int i = searchInsert(nums, target);
 //        int i = mySqrt(2563347);
@@ -431,7 +505,9 @@ public class Solution {
 //        }
 
 //        int i = majorityElement(nums);
-            iceBreakingGame(7,4);
+            //iceBreakingGame(7,4);
+        int i = maxProduct(words);
+        System.out.println(i);
 
     }
 }
